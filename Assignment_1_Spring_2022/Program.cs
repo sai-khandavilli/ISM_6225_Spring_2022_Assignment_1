@@ -90,7 +90,33 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here
-                String final_string ="";
+
+                Char[] output = new char[10000];
+                
+                
+                int j = 0;
+                for (int i = 0; i < s.Length; i++)
+                {
+                    //verifying if the element at the current index is a vowel.
+                    if (Convert.ToChar(s[i]) == 'A' || Convert.ToChar(s[i]) == 'a' || Convert.ToChar(s[i]) == 'E' || Convert.ToChar(s[i]) == 'e' || Convert.ToChar(s[i]) == 'I' || Convert.ToChar(s[i]) == 'i' || Convert.ToChar(s[i]) == 'O' || Convert.ToChar(s[i]) == 'o' || Convert.ToChar(s[i]) == 'U' || Convert.ToChar(s[i]) == 'u')
+                    {
+                        //No action if the index position contains a vowel.
+                        continue;
+                    }
+                    else
+                    {
+                        //else the consonant is appended to the jth position of the character array.
+                        output[j] = s[i];
+                        j++;
+                    }
+                        
+                    
+                }
+                //Converting the character array back to the string and returning the output.
+                string str = new string(output);
+                String final_string = "";
+                final_string = str;
+
                 return final_string;
             }
             catch (Exception)
@@ -125,16 +151,50 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
+
                 // write your code here.
-                return false;
-            }
+                int k = 0;
+                char[] out1 = new char[10000];
+                char[] out2 = new char[10000];
+
+                //If a string array contains spaces, it is a multidimensional array, hence we convert the string array into a single dimensional char array first.
+                
+                for (int i = 0; i < bulls_string1.Length; i++) 
+                {
+                    for (int j = 0; j < bulls_string1[i].Length; j++)
+                    {
+                        //String 1
+                        out1[k] = bulls_string1[i][j];
+                        k++;
+                    }
+                }
+                k = 0;
+                for (int i = 0; i < bulls_string2.Length; i++)
+                {
+                    for (int j = 0; j < bulls_string2[i].Length; j++)
+                    {
+                        //String 2
+                        out2[k] = bulls_string2[i][j];
+                        k++; 
+                    }
+                }
+                //Conversion of character array to a single dimenstional string
+                string out1_str = new string(out1);
+                string out2_str = new string(out2);
+                
+                //comparing strings for similarity and returning the corresponding boolean output.
+                if (out1_str == out2_str)
+                    return true;
+                else
+                    return false;
+        }
             catch (Exception)
             {
 
                 throw;
             }
 
-        }
+}
         /*
         <summary> 
        You are given an integer array bull_bucks. The unique elements of an array are the elements that appear exactly once in the array.
@@ -159,7 +219,30 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here
-                return 0;
+                int Sum = 0, count = 0;
+                for (int i = 0; i < bull_bucks.Length; i++) 
+                {
+                    for (int j = 0; j < bull_bucks.Length; j++) 
+                    {
+                        //Every time an element is encountered, the count is incremented.
+                        if (bull_bucks[i] == bull_bucks[j])
+                        {
+                            count++;
+                            
+                        }
+                    }
+                    //If an element is unique, the count will always be 1.
+                    if(count == 1)
+                    {
+                        //The sum is computed everytime a unique element is encountered.
+                        Sum = Sum + bull_bucks[i];
+                        
+                    }
+                    //The count has to be reset to 0 to prevent miscalculations due to overlapping.
+                    count = 0;
+                }
+
+                return Sum;
 
             }
             catch (Exception)
@@ -190,12 +273,33 @@ namespace DIS_Assignmnet1_SPRING_2022
 
         private static int DiagonalSum(int[,] bulls_grid)
         {
+            int Sum = 0, common;
             try
             {
                 // write your code here.
+                //Compute the length of the matrix.
+                int len = Convert.ToInt32(Math.Sqrt(bulls_grid.Length));
+            
+                for (int i = 0; i < len; i++)
+                {
+                //Computing sum for first diagonal
+                Sum = Sum + bulls_grid[i, i];                       
+                }
 
-                return 0;
-            }
+                for (int i = len - 1; i >= 0; i--)
+                {
+                    //Computing sum for second diagonal
+                    Sum = Sum + bulls_grid[Math.Abs(len - (i+1)),i];
+                }
+                if(((len) %2!=0)&&(len > 1))
+                {
+                    //subtracting the value of the element repeating in the second diagonal.
+                    common = (len - 1) / 2;
+                    Sum = Sum - bulls_grid[common, common];
+                }
+
+                return Sum;
+        }
             catch (Exception e)
             {
 
@@ -203,7 +307,7 @@ namespace DIS_Assignmnet1_SPRING_2022
                 throw;
             }
 
-        }
+}
 
 
 
@@ -225,7 +329,19 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here.
-                return "null";
+
+                char[] out_1 = new char[10000];
+
+                for (int i = 0; i < bulls_string.Length; i++)
+                {
+                    //the indexes within the indices array are used in the new character array.
+
+                    out_1[indices[i]] = bulls_string[i]; 
+                }
+                //the char array has to be converted back to a one dimensional string.
+                string output = new string(out_1);
+
+                return output;
             }
             catch (Exception e)
             {
@@ -262,16 +378,46 @@ namespace DIS_Assignmnet1_SPRING_2022
 
         private static string ReversePrefix(string bulls_string6, char ch)
         {
-            try
-            {
-                String prefix_string ="";
-                return prefix_string;
-            }
-            catch (Exception)
-            {
+            //try
+            //{
+                int pos = 0, j = 0;
+                char[] output = new char[10000];
 
-                throw;
-            }
+                //identifying the position of the character
+                for (int i = 0; i < bulls_string6.Length; i++)
+                {
+                    if(bulls_string6[i]==ch)
+                    {
+                        pos = i;
+                    }
+                }
+
+                //adding elements from the position (pos) to the first element
+                for (int i = pos; i >= 0; i--)
+                {
+
+                output[j] = bulls_string6[i];
+              
+                j++;
+                }
+
+                //adding the remainder of the string to the char array
+                for (int i = pos + 1; i < bulls_string6.Length; i++)
+                {
+                    output[i] = bulls_string6[i];
+                }
+
+                //converting char array into single dimension string
+                string output2 = new string(output);
+                String prefix_string ="";
+                prefix_string = output2;
+                return prefix_string;
+           // }
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
 
         }
     }
