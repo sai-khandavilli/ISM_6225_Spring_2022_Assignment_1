@@ -378,8 +378,8 @@ namespace DIS_Assignmnet1_SPRING_2022
 
         private static string ReversePrefix(string bulls_string6, char ch)
         {
-            //try
-            //{
+            try
+            {
                 int pos = 0, j = 0;
                 char[] output = new char[10000];
 
@@ -412,12 +412,12 @@ namespace DIS_Assignmnet1_SPRING_2022
                 String prefix_string ="";
                 prefix_string = output2;
                 return prefix_string;
-           // }
-            //catch (Exception)
-            //{
+            }
+            catch (Exception)
+            {
 
-            //    throw;
-            //}
+                throw;
+            }
 
         }
     }
